@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::get('categories', [CategoryController::class, 'index'])->name('category.all');
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('category.show');

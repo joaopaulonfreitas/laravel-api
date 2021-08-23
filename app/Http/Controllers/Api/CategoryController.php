@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        $categories = Category::all();
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -32,12 +34,12 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        return new CategoryResource($category);
     }
 
     /**
