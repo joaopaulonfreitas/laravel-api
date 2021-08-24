@@ -62,3 +62,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+----
+
+## Neste projeto
+
+<p><b style="color: red; text-transform: uppercase;">Observação:</b> por se tratar apenas de um projeto com fins de estudos, não descreverei os processos utilizados com tanta criticidade. Dito isso, peço que leve em consideração a ocorrência de erros ortográficos em descrições, imagens com qualidade reduzida ou algum Bug que possa ocorrer.</p>
+
+
+<p align="center"><img src="resources/images/shop-start-template.png" width="640" alt="[Imagem de template básico utilizado para listagem de produtos!]" title="Imagem de template básico utilizado para listagem de produtos!"></p>
+
+## Do Blade ao Vue.js
+
+<p>A aplicação foi desenvolvida com um template simples de listagem utilizando o carregamento de view com <b>Blade</b>.</p>
+<p>Tudo isso foi pensado e planejado para que após essa etapa, ocorra uma migração do carregamento para utilizar o consumo de produtos vindos de uma API e o exibí-los utilizando o <b>Vue.js</b></p>
+
+## Exemplo de End Points já criados
+
+- api/categories
+- api/categories/{category}
+- api/products
+- api/products/{product}
+
+<p align="center"><b style="color: red;">[...Continua...]</b></p> 
