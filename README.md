@@ -92,10 +92,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <p align="center"><img src="resources/images/loading-products-with-vue.png" width="640" alt="[Imagem de template básico utilizado para listagem de produtos!]" title="Imagem de template básico utilizado para listagem de produtos!"></p>
 
-<p><img src="resources/images/mail.jpg" alt="..." title="..."><br>
-<strong>Ao seu sucesso,</strong><br> João Paulo N Freitas</p>
-
-
 ## Páginação de resultados
 
 <p>A integração do vue com a API do Laravel facilita muito o trabalho e trás uma produtividade sem comparações.</p>
@@ -104,4 +100,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 <p align="center"><img src="resources/images/pagination-with-vue.png" width="640" alt="[Imagem de páginação de resultados]" title="Imagem de páginação de resultados"></p>
 
-<p align="center"><b style="color: red;">[...Continua...]</b></p> 
+<p><img src="resources/images/mail.jpg" alt="..." title="..."><br>
+<strong>Ao seu sucesso,</strong><br> João Paulo N Freitas</p>
