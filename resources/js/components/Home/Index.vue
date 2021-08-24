@@ -1,117 +1,137 @@
 <template>
-
-<section class="py-5">
+  <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
+      <div
+        class="
+          row
+          gx-4 gx-lg-5
+          row-cols-1 row-cols-md-3 row-cols-xl-4
+          justify-content-center
+        "
+      >
+        <categories :categories="state.categories.data" />
 
-        <div class="row gx-4 gx-lg-5 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="flex-fill text-text-center">
 
-            <categories :categories="state.categories"/>
+          <div class=" row px-0 gx-4 gx-lg-5 row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 justify-content-center">
+            <product
+              v-for="product in state.products.data"
+              :key="product.id"
+              v-bind="{ ...product }"
+            />
+          </div>
 
-            <div class="flex-fill row px-0 gx-4 gx-lg-5 row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 justify-content-center">
-                <product v-for="product in state.products"
-                    :key="product.id"
-                    v-bind="{...product}"/>
-            </div>
-
+          <pagination
+            @getproducts="GetProducts"
+            class="mt-6"
+            :links="state.products.meta ? state.products.meta.links : []"/>
         </div>
+      </div>
     </div>
-</section>
-
+  </section>
 </template>
 
 <script>
-import { onMounted, reactive } from 'vue'
-import { useToast } from 'vue-toastification'
-import services from '../../services'
-import Categories from './Categories.vue'
-import Product from './Product.vue'
+import { onBeforeUnmount, onMounted, reactive } from "vue";
+import { useToast } from "vue-toastification";
+import services from "../../services";
+import usePaginate from "../../hooks/usePaginate";
+import Categories from "./Categories.vue";
+import Product from "./Product.vue";
 
-export default{
-    components: {
-        Categories,
-        Product
-    },
-    setup() {
-        const toast = useToast()
-        const state = reactive({
-            hasError: false,
-            isLoading: false,
-            categories: [],
-            products: []
-        })
+import Pagination from "../Defaults/Pagination.vue";
 
-        async function GetProducts()
-        {
-            try{
-                const {data, errors} = await services.products.get({})
+export default {
+  components: {
+    Categories,
+    Product,
+    Pagination,
+  },
+  setup() {
+    const toast = useToast();
+    const paginate = usePaginate();
 
-                if(!errors){
-                    state.products = data.data
-                    toast.success('Produtos carregados com sucesso')
-                    return
-                }
+    const state = reactive({
+      hasError: false,
+      isLoading: false,
+      categories: {},
+      products: {},
+    });
 
-                if(errors.status === 404){
-                    toast.error('Produtos não encontrados')
-                }
+    onMounted(() => {
+      //paginate.listen(GetProducts);
 
-                if(errors.status === 401){
-                    toast.error('Dados inválidos')
-                }
+      toast.clear();
+      state.isLoading = true;
 
-                if(errors.status === 400){
-                    toast.error('Ocorreu um erro ao obter produtos')
-                }
+      GetProducts({});
+      GetCategories();
 
-            }catch(error){
-                state.isLoading = false
-                state.hasError = !!error
-                toast.error('Ocorreu um erro ao obter produtos')
-            }
+      state.isLoading = false;
+    });
+
+    onBeforeUnmount(() => {
+      //paginate.off(GetProducts);
+    });
+
+    async function GetProducts(payload) {
+      try {
+        const { data, errors } = await services.products.get(payload);
+
+        if (!errors) {
+          state.products = data;
+          toast.success("Produtos carregados com sucesso");
+          return;
         }
 
-        async function GetCategories()
-        {
-            try{
-                const {data, errors} = await services.products.getCategories({})
-
-                if(!errors){
-                    state.categories = data.data
-                    return
-                }
-
-                if(errors.status === 404){
-                    toast.error('Categorias não encontradas')
-                }
-
-                if(errors.status === 401){
-                    toast.error('Dados inválidos')
-                }
-
-                if(errors.status === 400){
-                    toast.error('Ocorreu um erro ao obter categorias')
-                }
-
-                state.isLoading = false
-
-            }catch(error){
-                state.isLoading = false
-                state.hasError = !!error
-                toast.error('Ocorreu um erro ao obter categorias')
-            }
+        if (errors.status === 404) {
+          toast.error("Produtos não encontrados");
         }
 
-        onMounted(() => {
-            toast.clear()
-            state.isLoading = true
+        if (errors.status === 401) {
+          toast.error("Dados inválidos");
+        }
 
-            GetProducts()
-            GetCategories()
-
-            state.isLoading = false
-        })
-
-        return {state}
+        if (errors.status === 400) {
+          toast.error("Ocorreu um erro ao obter produtos");
+        }
+      } catch (error) {
+        state.isLoading = false;
+        state.hasError = !!error;
+        toast.error("Ocorreu um erro ao obter produtos");
+      }
     }
-}
+
+    async function GetCategories() {
+      try {
+        const { data, errors } = await services.products.getCategories({});
+
+        if (!errors) {
+          state.categories = data;
+          return;
+        }
+
+        if (errors.status === 404) {
+          toast.error("Categorias não encontradas");
+        }
+
+        if (errors.status === 401) {
+          toast.error("Dados inválidos");
+        }
+
+        if (errors.status === 400) {
+          toast.error("Ocorreu um erro ao obter categorias");
+        }
+
+        state.isLoading = false;
+      } catch (error) {
+        state.isLoading = false;
+        state.hasError = !!error;
+        toast.error("Ocorreu um erro ao obter categorias");
+      }
+    }
+
+    return { state, GetProducts };
+  },
+};
 </script>

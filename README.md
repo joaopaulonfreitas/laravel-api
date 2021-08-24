@@ -95,4 +95,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 <p><img src="resources/images/mail.jpg" alt="..." title="..."><br>
 <strong>Ao seu sucesso,</strong><br> João Paulo N Freitas</p>
 
+
+## Páginação de resultados
+
+<p>A integração do vue com a API do Laravel facilita muito o trabalho e trás uma produtividade sem comparações.</p>
+<p>Quem já passou pela situação de criar uma páginação de resultados sabe o quanto é CHATO.</p>
+<p>O **->paginate()** do Laravel, devolve um objeto completo e cabe a você apenas exibir em tela.</p>
+
+<p align="center"><img src="resources/images/pagination-with-vue.png" width="640" alt="[Imagem de páginação de resultados]" title="Imagem de páginação de resultados"></p>
+
 <p align="center"><b style="color: red;">[...Continua...]</b></p> 

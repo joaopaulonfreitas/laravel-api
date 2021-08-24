@@ -1,6 +1,7 @@
 export default httpClient => ({
-    get: async ({}) => {
-        const response = await httpClient.get('/api/products', {})
+    get: async ({url, page}) => {
+
+        const response = await httpClient.get(url || `/api/products?page=${page}`, {})
         let errors = null
 
         if(!response.data)
