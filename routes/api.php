@@ -20,9 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+/** CATEGORIES */
 Route::get('categories', [CategoryController::class, 'index'])->name('category.all');
 Route::get('categories/{category}', [CategoryController::class, 'show'])->name('category.show');
 
-
+/** PRODUCTS */
 Route::get('products', [ProductController::class, 'index'])->name('products.all');
