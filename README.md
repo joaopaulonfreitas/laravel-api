@@ -86,4 +86,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - api/products
 - api/products/{product}
 
+## Vue.js, carregando produtos
+
+<p>Abaixo, veja como está a distribuição dos components de produtos após o consumo da API que retorna os dados para o carregamento em tela.</p>
+
+<p align="center"><img src="resources/images/loading-products-with-vue.png" width="640" alt="[Imagem de template básico utilizado para listagem de produtos!]" title="Imagem de template básico utilizado para listagem de produtos!"></p>
+
+<p><img src="resources/images/mail.jpg" alt="..." title="..."><br>
+<strong>Ao seu sucesso,</strong><br> João Paulo N Freitas</p>
+
 <p align="center"><b style="color: red;">[...Continua...]</b></p> 

@@ -19,5 +19,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/vue', [PageController::class, 'vue'])->name('vue');
 
 

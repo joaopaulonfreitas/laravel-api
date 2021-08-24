@@ -12,8 +12,9 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .vue()
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+    ])
 
-//mix.copyDirectory('resources/images', 'public/js/images')
+mix.copyDirectory('resources/images', 'public/images')

@@ -1,4 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/images/favicon.ico": "/images/favicon.ico",
+    "/images/shop-start-template.png": "/images/shop-start-template.png",
+    "/images/loading-products-with-vue.png": "/images/loading-products-with-vue.png",
+    "/images/mail.jpg": "/images/mail.jpg"
 }
