@@ -46,7 +46,7 @@
         </nav>
 
         <div id="app">
-            <front-page />
+            <app />
         </div>
 
         <!-- Footer-->

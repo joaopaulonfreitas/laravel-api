@@ -1,5 +1,7 @@
 <template>
-<home />
+
+    <home />
+
 </template>
 <script>
 import Home from './Home/Index.vue'
