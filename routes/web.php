@@ -18,7 +18,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/vue', [PageController::class, 'vue'])->name('vue');
+Route::group(['as' => 'pages'], function(){
+
+    Route::get('/', [PageController::class, 'home'])->name('home');
+    Route::get('/categories/create', [PageController::class, 'categoriesCreate'])->name('categories.create');
+
+
+    Route::get('/vue', [PageController::class, 'vue'])->name('vue');
+
+});
 
 

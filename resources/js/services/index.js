@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import ProductService from './products'
+import CategoryService from './categories'
 
 const httpClient = axios.create({
     baseURL: process.env.APP_URL,
@@ -21,5 +23,6 @@ httpClient.interceptors.response.use((response) => response, (error) => {
 })
 
 export default{
-    products: ProductService(httpClient)
+    products: ProductService(httpClient),
+    categories: CategoryService(httpClient),
 }

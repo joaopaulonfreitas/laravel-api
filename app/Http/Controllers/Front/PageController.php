@@ -16,6 +16,13 @@ class PageController extends Controller
         return view('pages.home.index', compact('products'));
     }
 
+    public function categoriesCreate()
+    {
+        $products = Product::all();
+
+        return view('pages.categories.index', compact('products'));
+    }
+
     public function vue()
     {
         $products = Product::all();

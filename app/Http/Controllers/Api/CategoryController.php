@@ -28,7 +28,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = Category::create($request->all());
+
+        return new CategoryResource($category);
     }
 
     /**
@@ -40,6 +42,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return new CategoryResource($category);
+        //Category::where('id', $category->id)->firstOr(fn() => abort(403));
     }
 
     /**
