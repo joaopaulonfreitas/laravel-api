@@ -19069,8 +19069,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       isLoading: false,
       hasError: false,
+      photo: '',
       form: {
-        name: ''
+        name: '',
+        photo: ''
       }
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
@@ -19139,9 +19141,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _createCategory.apply(this, arguments);
     }
 
+    function onFileChange(e) {
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      state.form.photo = files[0] || null;
+      createImage(files[0]);
+    }
+
+    function createImage(file) {
+      var image = new Image();
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        state.photo = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage(e) {
+      state.photo = '';
+      state.form.photo = '';
+    }
+
     return {
       state: state,
-      createCategory: createCategory
+      createCategory: createCategory,
+      onFileChange: onFileChange,
+      removeImage: removeImage
     };
   }
 });
@@ -19463,24 +19490,39 @@ var _hoisted_2 = {
   "class": "row"
 };
 var _hoisted_3 = {
-  "class": "col-lg-12"
+  key: 0,
+  "class": "col-lg-3 border rounded p-1"
 };
-var _hoisted_4 = {
-  "class": "d-flex flex-column"
+var _hoisted_4 = ["src"];
+var _hoisted_5 = {
+  "class": "d-flex flex-column",
+  enctype: "multipart/form-data"
+};
+var _hoisted_6 = {
+  "class": "form-group w-100"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Name:", -1
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Name:", -1
 /* HOISTED */
 );
 
-var _hoisted_6 = {
+var _hoisted_8 = {
+  key: 0,
+  "class": "form-group w-100"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Photo", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
   "class": "mt-3"
 };
-var _hoisted_7 = {
+var _hoisted_11 = {
   key: 0
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "spinner-grow spinner-grow-sm",
   role: "status",
   "aria-hidden": "true"
@@ -19488,28 +19530,54 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Loading... ");
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Loading... ");
 
-var _hoisted_10 = [_hoisted_8, _hoisted_9];
-var _hoisted_11 = {
+var _hoisted_14 = [_hoisted_12, _hoisted_13];
+var _hoisted_15 = {
   key: 1
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.state.photo ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    src: $setup.state.photo,
+    "class": "m-auto w-100 rounded shadow-sm"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-danger w-100 mt-1",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $setup.removeImage && $setup.removeImage.apply($setup, arguments);
+    })
+  }, "Remove image")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
+      'col-lg-12': !$setup.state.photo,
+      'col-9': $setup.state.photo
+    })
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $setup.state.form.name = $event;
     }),
     name: "name",
     "class": "form-control"
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.state.form.name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.state.form.name]])]), !$setup.state.photo ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("label", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "file",
+    "class": "form-control form-control-file",
+    id: "customFile",
+    onChange: _cache[2] || (_cache[2] = function () {
+      return $setup.onFileChange && $setup.onFileChange.apply($setup, arguments);
+    })
+  }, null, 32
+  /* HYDRATE_EVENTS */
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
-    onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onClick: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $setup.createCategory && $setup.createCategory.apply($setup, arguments);
     }, ["prevent"]))
-  }, [$setup.state.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_7, _hoisted_10)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, " Add Category "))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"btn btn-primary\" type=\"button\" disabled>\n  <span class=\"spinner-grow spinner-grow-sm\" role=\"status\" aria-hidden=\"true\"></span>\n  Loading...\n</button> ")])])])])]);
+  }, [$setup.state.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_11, _hoisted_14)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_15, " Add Category "))])])])], 2
+  /* CLASS */
+  )])]);
 }
 
 /***/ }),
@@ -19974,18 +20042,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     store: function () {
       var _store = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(_ref3) {
-        var name, response, errors;
+        var name, photo, data, config, response, errors;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                name = _ref3.name;
-                _context3.next = 3;
-                return httpClient.post("/api/categories", {
-                  name: name
-                });
+                name = _ref3.name, photo = _ref3.photo;
+                data = new FormData();
+                data.append('photo', photo || null);
+                data.append('name', name || null);
+                config = {
+                  headers: {
+                    'content-type': 'multipart/form-data'
+                  }
+                };
+                _context3.next = 7;
+                return httpClient.post("/api/categories", data, config);
 
-              case 3:
+              case 7:
                 response = _context3.sent;
                 errors = null;
 
@@ -20001,7 +20075,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   errors: errors
                 });
 
-              case 7:
+              case 11:
               case "end":
                 return _context3.stop();
             }

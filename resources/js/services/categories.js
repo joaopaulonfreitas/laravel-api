@@ -34,8 +34,19 @@ export default httpClient => ({
             errors:errors
         }
     },
-    store: async ({name}) => {
-        const response = await httpClient.post(`/api/categories`, {name: name})
+    store: async ({name, photo}) => {
+
+        let data = new FormData();
+        data.append('photo', photo || null);
+        data.append('name', name || null);
+
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+
+        const response = await httpClient.post(`/api/categories`, data, config)
         let errors = null
 
         if(!response.data)

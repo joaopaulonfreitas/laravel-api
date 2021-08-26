@@ -1,28 +1,35 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <form class="d-flex flex-column">
-                    <label>
+            <div v-if="state.photo" class="col-lg-3 border rounded p-1">
+                <img :src="state.photo" class="m-auto w-100 rounded shadow-sm" />
+                <button class="btn btn-danger w-100 mt-1" @click="removeImage">Remove image</button>
+            </div>
+
+            <div :class="{'col-lg-12': !state.photo, 'col-9': state.photo}">
+                <form class="d-flex flex-column" enctype="multipart/form-data">
+
+                    <label class="form-group w-100">
                         <span>Name:</span>
                         <input type="text" v-model="state.form.name" name="name" class="form-control"/>
                     </label>
+
+
+                    <label class="form-group w-100" v-if="!state.photo">
+                        <span>Photo</span>
+                        <input type="file" class="form-control form-control-file" id="customFile" @change="onFileChange"/>
+                    </label>
+
                     <div class="mt-3">
-                    <button class="btn btn-primary" @click.prevent="createCategory">
-                        <span v-if="state.isLoading">
-                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                            Loading...
-                        </span>
-                        <span v-else>
-                            Add Category
-                        </span>
-                    </button>
-
-
-                    <!-- <button class="btn btn-primary" type="button" disabled>
-  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-  Loading...
-</button> -->
+                        <button class="btn btn-primary" @click.prevent="createCategory">
+                            <span v-if="state.isLoading">
+                                <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </span>
+                            <span v-else>
+                                Add Category
+                            </span>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -42,8 +49,10 @@ export default {
         const state = reactive({
             isLoading: false,
             hasError: false,
+            photo: '',
             form: {
-                name: ''
+                name: '',
+                photo: ''
             }
         })
 
@@ -81,7 +90,32 @@ export default {
             }
         }
 
-        return {state, createCategory}
+        function onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+
+            state.form.photo = files[0] || null
+
+            createImage(files[0]);
+        }
+
+        function createImage(file) {
+            var image = new Image();
+            var reader = new FileReader();
+
+            reader.onload = (e) => {
+                state.photo = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage(e) {
+            state.photo = ''
+            state.form.photo = '';
+        }
+
+        return {state, createCategory, onFileChange, removeImage}
     }
 }
 </script>
