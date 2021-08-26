@@ -21,9 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /** CATEGORIES */
-Route::get('categories', [CategoryController::class, 'index'])->name('category.all');
-Route::get('categories/{category}', [CategoryController::class, 'show'])->name('category.show');
-Route::post('categories', [CategoryController::class, 'store'])->name('category.store');
+Route::get('categories', [CategoryController::class, 'index'])->name('categories.all');
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::put('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 /** PRODUCTS */
 Route::get('products', [ProductController::class, 'index'])->name('products.all');
