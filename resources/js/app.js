@@ -1,15 +1,11 @@
-/**
- * window.Vue = require('vue');
- * Vue.component('front-page', require('./components/Front.vue').default);
- * const app = new Vue({ el: '#app'})
- * app.component('pagination', AdvancedLaravelVuePaginate);
- */
-
 require('./bootstrap');
 
-import { createApp } from 'vue'
-import Toast from "vue-toastification";
+require('alpinejs');
 
+
+import { createApp } from 'vue'
+
+import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
 // Components

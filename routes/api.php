@@ -20,8 +20,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/** CATEGORIES */
-Route::apiResource('categories', CategoryController::class);
+// Api authentication with Sanctum
+Route::group(['middleware' => ['auth:sanctum']], function(){
 
-/** PRODUCTS */
-Route::get('products', [ProductController::class, 'index'])->name('products.all');
+    /** CATEGORIES */
+    Route::apiResource('categories', CategoryController::class);
+
+    /** PRODUCTS */
+    Route::get('products', [ProductController::class, 'index'])->name('products.all');
+
+});

@@ -80,7 +80,6 @@ export default {
 
         if (!errors) {
           state.products = data;
-          toast.success("Produtos carregados com sucesso");
           return;
         }
 

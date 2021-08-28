@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-import ProductService from './products'
-import CategoryService from './categories'
-
 const httpClient = axios.create({
     baseURL: process.env.APP_URL,
+    withCredentials: true,
     headers: {
         common: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -22,7 +20,13 @@ httpClient.interceptors.response.use((response) => response, (error) => {
     return error
 })
 
+
+import AuthService from './auth'
+import ProductService from './products'
+import CategoryService from './categories'
+
 export default{
+    auth: AuthService(httpClient),
     products: ProductService(httpClient),
     categories: CategoryService(httpClient),
 }

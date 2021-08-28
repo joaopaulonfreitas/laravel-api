@@ -14,18 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::group(['as' => 'pages'], function(){
-
-    Route::get('/', [PageController::class, 'home'])->name('home');
-    Route::get('/categories/create', [PageController::class, 'categoriesCreate'])->name('categories.create');
-
-
-    Route::get('/vue', [PageController::class, 'vue'])->name('vue');
-
+Route::get('/', function () {
+    return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+Route::get('vue', [PageController::class, 'vue'])
+    ->name('page.vue');
+
+require __DIR__.'/auth.php';
